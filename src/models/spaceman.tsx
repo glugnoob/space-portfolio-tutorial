@@ -22,7 +22,12 @@ type GLTFResult = GLTF & {
 
 // type ActionName = 'cheering' | 'idle' | 'talk on phone'
 
-export function Spaceman(props: React.JSX.IntrinsicElements["group"]) {
+interface Props {
+  props: React.JSX.IntrinsicElements["group"];
+  activeAction: "cheering" | "idle" | "talk on phone";
+}
+
+export function Spaceman({ activeAction, props }: Props) {
   const group = useRef<THREE.Group>(null);
   const { nodes, materials, animations } = useGLTF(
     spacemanModel
@@ -30,8 +35,13 @@ export function Spaceman(props: React.JSX.IntrinsicElements["group"]) {
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    actions["idle"]?.play();
-  }, []);
+    Object.values(actions).forEach((action) => {
+      if (action === actions[activeAction]) return;
+      action?.fadeOut(0.5);
+    });
+
+    actions[activeAction]?.reset().fadeIn(0.5).play();
+  }, [activeAction]);
 
   return (
     <group ref={group} {...props} dispose={null}>

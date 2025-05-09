@@ -30,7 +30,13 @@ const templateId = "template_kbur7qq";
 
 emailjs.init(userId);
 
-const ContactForm = () => {
+interface Props {
+  handleFocus: () => void;
+  handleBlur: () => void;
+  handleSend: (callback?: () => void) => void;
+}
+
+const ContactForm = ({ handleBlur, handleFocus, handleSend }: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       email: "",
@@ -41,8 +47,11 @@ const ContactForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    emailjs.send(serviceId, templateId, values, userId);
-    toast("Email sent successfully");
+    // emailjs.send(serviceId, templateId, values, userId);
+    handleSend(() => {
+      toast("Email sent successfully");
+      form.reset();
+    });
   };
 
   return (
@@ -50,6 +59,8 @@ const ContactForm = () => {
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="w-full space-y-10 text-white"
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       >
         <FormField
           control={form.control}

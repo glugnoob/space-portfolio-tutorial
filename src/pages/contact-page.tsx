@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import SpaceBackground from "../assets/skybox/Spacebox_top.png";
-import { Suspense, useRef } from "react";
+import { Suspense, useRef, useState } from "react";
 import ContactForm from "../components/contact-form";
 import { Canvas } from "@react-three/fiber";
 import HtmlLoader from "@/components/html-loader";
@@ -12,6 +12,25 @@ const ContactPage = () => {
   const { scrollYProgress } = useScroll({ container: containerRef });
 
   const yPos = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  const [activeAction, setActiveAction] = useState<
+    "cheering" | "idle" | "talk on phone"
+  >("idle");
+
+  const handleFocus = () => {
+    setActiveAction("talk on phone");
+  };
+  const handleBlur = () => {
+    setActiveAction("idle");
+  };
+
+  const handleSend = (callback?: () => void) => {
+    setActiveAction("cheering");
+    window.setTimeout(() => {
+      setActiveAction("idle");
+      if (callback) callback();
+    }, 4000);
+  };
 
   return (
     <motion.section
@@ -27,7 +46,11 @@ const ContactPage = () => {
     >
       <h1 className="text-5xl">Contact Me:</h1>
       <div className="mt-5 flex flex-col-reverse items-center">
-        <ContactForm />
+        <ContactForm
+          handleBlur={handleBlur}
+          handleFocus={handleFocus}
+          handleSend={handleSend}
+        />
         <div className="w-full h-[400px]">
           <Canvas
             camera={{
@@ -41,9 +64,12 @@ const ContactPage = () => {
             <Suspense fallback={<HtmlLoader />}>
               <ambientLight intensity={8} />
               <Spaceman
-                scale={0.01}
-                position={[0, 0, -1.5]}
-                rotation={[Math.PI / 2, 0, 0]}
+                props={{
+                  scale: 0.01,
+                  position: [0, 0, -1.5],
+                  rotation: [Math.PI / 2, 0, 0],
+                }}
+                activeAction={activeAction}
               />
             </Suspense>
           </Canvas>
