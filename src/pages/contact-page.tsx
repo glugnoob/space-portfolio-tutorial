@@ -35,7 +35,7 @@ const ContactPage = () => {
   return (
     <motion.section
       ref={containerRef}
-      className="h-screen pt-20 overflow-y-auto text-white"
+      className="h-screen pt-20 overflow-y-auto text-white px-10"
       style={{
         backgroundColor: "#180716",
         backgroundImage: `url(${SpaceBackground})`,
@@ -44,14 +44,14 @@ const ContactPage = () => {
         backgroundPositionY: yPos,
       }}
     >
-      <h1 className="text-5xl">Contact Me:</h1>
-      <div className="mt-5 flex flex-col-reverse items-center">
+      <h1 className="text-5xl mt-5">Contact Me:</h1>
+      <div className="flex items-center">
         <ContactForm
           handleBlur={handleBlur}
           handleFocus={handleFocus}
           handleSend={handleSend}
         />
-        <div className="w-full h-[400px]">
+        <div className="w-1/3 h-[600px]">
           <Canvas
             camera={{
               near: 0.1,
@@ -62,11 +62,11 @@ const ContactPage = () => {
             }}
           >
             <Suspense fallback={<HtmlLoader />}>
-              <ambientLight intensity={8} />
+              <ambientLight intensity={20} />
               <Spaceman
                 props={{
                   scale: 0.01,
-                  position: [0, 0, -1.5],
+                  position: [0, 0, -2],
                   rotation: [Math.PI / 2, 0, 0],
                 }}
                 activeAction={activeAction}

@@ -58,7 +58,7 @@ const ContactForm = ({ handleBlur, handleFocus, handleSend }: Props) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full space-y-10 text-white"
+        className="w-2/3 space-y-10 text-white"
         onFocus={handleFocus}
         onBlur={handleBlur}
       >
