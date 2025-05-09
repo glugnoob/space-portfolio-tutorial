@@ -7,6 +7,7 @@ import { EarthPlanet } from "../models/earth-planet";
 import * as THREE from "three";
 import { usePlanetStore } from "../stores/planet-store";
 import CameraController from "../components/camera-controller";
+import { RedPlanet } from "@/models/red-planet";
 
 const HomePage = () => {
   const resetActivePlanet = usePlanetStore((state) => state.resetActivePlanet);
@@ -50,6 +51,7 @@ const HomePage = () => {
             tiltAngle={4}
             defaultScale={0.02}
           />
+          <RedPlanet position={[5, -8, -17]} scale={1} />
         </Suspense>
       </Canvas>
     </section>
