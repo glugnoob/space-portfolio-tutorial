@@ -51,7 +51,17 @@ const HomePage = () => {
             tiltAngle={4}
             defaultScale={0.02}
           />
-          <RedPlanet position={[5, -8, -17]} scale={1} />
+          <RedPlanet
+            initial={{
+              rotation: [-Math.PI / 6, 0, 0],
+            }}
+            rotationSpeed={0.007}
+            position={new THREE.Vector3(6, -12, -20)}
+            orbitRadius={15}
+            orbitSpeed={-0.003}
+            tiltAngle={3}
+            defaultScale={1.4}
+          />
         </Suspense>
       </Canvas>
     </section>

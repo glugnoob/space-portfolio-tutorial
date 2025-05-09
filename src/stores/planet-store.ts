@@ -4,6 +4,7 @@ import { create } from "zustand";
 export enum ActivePlanet {
   NONE,
   EARTH,
+  RED,
 }
 
 interface PlanetStore {
