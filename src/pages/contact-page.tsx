@@ -5,6 +5,7 @@ import ContactForm from "../components/contact-form";
 import { Canvas } from "@react-three/fiber";
 import HtmlLoader from "@/components/html-loader";
 import { Spaceman } from "@/models/spaceman";
+import { pageVariants } from "@/lib/constants/page-transitions";
 
 const ContactPage = () => {
   const containerRef = useRef<HTMLElement | null>(null);
@@ -43,6 +44,10 @@ const ContactPage = () => {
         backgroundPositionX: "center",
         backgroundPositionY: yPos,
       }}
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
     >
       <h1 className="text-5xl mt-5">Contact Me:</h1>
       <div className="flex items-center">

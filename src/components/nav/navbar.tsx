@@ -1,4 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
+import RocketShip from "./rocket-ship";
 
 const Navbar = () => {
   const route = useLocation().pathname;
@@ -31,8 +32,8 @@ const Navbar = () => {
           Projects
         </NavLink>
       </div>
-      <NavLink to="/" className="absolute left-1/2 font-bold">
-        Home
+      <NavLink to="/" className="absolute right-1/2 top-3 font-bold">
+        <RocketShip />
       </NavLink>
     </nav>
   );

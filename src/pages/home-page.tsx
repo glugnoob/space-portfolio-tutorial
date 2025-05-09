@@ -8,6 +8,8 @@ import * as THREE from "three";
 import { usePlanetStore } from "../stores/planet-store";
 import CameraController from "../components/camera-controller";
 import { RedPlanet } from "@/models/red-planet";
+import { motion } from "framer-motion";
+import { pageVariants } from "@/lib/constants/page-transitions";
 
 const HomePage = () => {
   const resetActivePlanet = usePlanetStore((state) => state.resetActivePlanet);
@@ -17,7 +19,13 @@ const HomePage = () => {
   }, []);
 
   return (
-    <section className="flex items-center justify-center h-screen overflow-hidden">
+    <motion.section
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="flex items-center justify-center h-screen overflow-hidden"
+    >
       <Canvas
         camera={{
           near: 0.1,
@@ -64,7 +72,7 @@ const HomePage = () => {
           />
         </Suspense>
       </Canvas>
-    </section>
+    </motion.section>
   );
 };
 
