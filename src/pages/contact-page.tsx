@@ -1,7 +1,10 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import SpaceBackground from "../assets/skybox/Spacebox_top.png";
-import { useRef } from "react";
+import { Suspense, useRef } from "react";
 import ContactForm from "../components/contact-form";
+import { Canvas } from "@react-three/fiber";
+import HtmlLoader from "@/components/html-loader";
+import { Spaceman } from "@/models/spaceman";
 
 const ContactPage = () => {
   const containerRef = useRef<HTMLElement | null>(null);
@@ -22,9 +25,29 @@ const ContactPage = () => {
         backgroundPositionY: yPos,
       }}
     >
-      <div className="mt-5">
-        <h1 className="text-5xl">Contact Me:</h1>
+      <h1 className="text-5xl">Contact Me:</h1>
+      <div className="mt-5 flex flex-col-reverse items-center">
         <ContactForm />
+        <div className="w-full h-[400px]">
+          <Canvas
+            camera={{
+              near: 0.1,
+              far: 1000,
+              fov: 75,
+              position: [0, 1, 0],
+              rotation: [0, 0, 0],
+            }}
+          >
+            <Suspense fallback={<HtmlLoader />}>
+              <ambientLight intensity={8} />
+              <Spaceman
+                scale={0.01}
+                position={[0, 0, -1.5]}
+                rotation={[Math.PI / 2, 0, 0]}
+              />
+            </Suspense>
+          </Canvas>
+        </div>
       </div>
 
       <div style={{ paddingBottom: 3000 }} />
