@@ -5,6 +5,7 @@ export enum ActivePlanet {
   NONE,
   EARTH,
   RED,
+  ICE,
 }
 
 interface PlanetStore {

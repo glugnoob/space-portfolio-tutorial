@@ -10,6 +10,7 @@ import CameraController from "../components/camera-controller";
 import { RedPlanet } from "@/models/red-planet";
 import { motion } from "framer-motion";
 import { pageVariants } from "@/lib/constants/page-transitions";
+import { IcePlanet } from "@/models/ice-planet";
 
 const HomePage = () => {
   const resetActivePlanet = usePlanetStore((state) => state.resetActivePlanet);
@@ -69,6 +70,17 @@ const HomePage = () => {
             orbitSpeed={-0.003}
             tiltAngle={3}
             defaultScale={1.4}
+          />
+          <IcePlanet
+            initial={{
+              rotation: [-Math.PI / 6, 0, 0],
+            }}
+            rotationSpeed={0.004}
+            position={new THREE.Vector3(10, -10, -55)}
+            orbitRadius={80}
+            orbitSpeed={0.001}
+            tiltAngle={7}
+            defaultScale={4}
           />
         </Suspense>
       </Canvas>
