@@ -118,3 +118,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+.hover-container {
+  transition: 300ms;
+  backdrop-filter: blur(20px);
+  transform-style: preserve-3d;
+  transform-origin: top left;
+}
+
+.hover-container:hover {
+  transform: translateZ(80px) translateY(-5px) rotateX(15deg) rotateY(15deg);
+}
