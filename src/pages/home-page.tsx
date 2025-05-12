@@ -11,6 +11,7 @@ import { RedPlanet } from "@/models/red-planet";
 import { motion } from "framer-motion";
 import { pageVariants } from "@/lib/constants/page-transitions";
 import { IcePlanet } from "@/models/ice-planet";
+import { toast } from "sonner";
 
 const HomePage = () => {
   const resetActivePlanet = usePlanetStore((state) => state.resetActivePlanet);
@@ -38,6 +39,28 @@ const HomePage = () => {
         onPointerMissed={(e) => {
           e.stopPropagation();
           resetActivePlanet();
+        }}
+        onCreated={() => {
+          const hasSessionStorage = !!sessionStorage.getItem("IsSet");
+
+          if (hasSessionStorage) return;
+
+          toast(
+            "Welcome to my solar system! Click on any of the planets to get started.",
+            {
+              duration: 8000,
+              onAutoClose: () => {
+                sessionStorage.setItem("IsSet", "Set");
+              },
+              style: {
+                background: "black",
+                color: "white",
+                padding: 30,
+                fontSize: 22,
+                textTransform: "capitalize",
+              },
+            }
+          );
         }}
       >
         <Suspense fallback={<HtmlLoader />}>
