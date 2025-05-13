@@ -47,7 +47,7 @@ const ContactForm = ({ handleBlur, handleFocus, handleSend }: Props) => {
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // emailjs.send(serviceId, templateId, values, userId);
+    emailjs.send(serviceId, templateId, values, userId);
     handleSend(() => {
       toast("Email sent successfully");
       form.reset();

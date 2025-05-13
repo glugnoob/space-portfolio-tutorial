@@ -99,19 +99,16 @@ export function IcePlanet({
       {...initial}
       dispose={null}
       ref={icePlanetRef}
-      onPointerOver={(e: any) => {
-        e.stopPropagation();
+      onPointerOver={() => {
         setIsHovered(true);
         document.body.style.cursor = "pointer";
       }}
-      onPointerLeave={(e: any) => {
-        e.stopPropagation();
+      onPointerLeave={() => {
         setIsHovered(false);
         document.body.style.cursor = "auto";
       }}
       scale={scale}
-      onClick={(e: any) => {
-        e.stopPropagation();
+      onClick={() => {
         if (!icePlanetRef.current) return;
         const offset = 8;
         const targetPos = new THREE.Vector3().copy(
